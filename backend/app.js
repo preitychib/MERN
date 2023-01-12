@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import router from "./routes/user-routes";
 const app = express();
 
-app.use("api/user", router);
+app.use("/api/user", router);
 mongoose
   .connect(
     "mongodb+srv://mernblog:mernblog@cluster0.lgobm9l.mongodb.net/?retryWrites=true&w=majority"
