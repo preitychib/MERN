@@ -1,3 +1,4 @@
+import e from "express";
 import User from "../models/User";
 
 export const getAllUser = async (req, res, next) => {
@@ -11,4 +12,31 @@ export const getAllUser = async (req, res, next) => {
     return res.status(404).json({ message: "No Users Found" });
   }
   return res.status(200).json({ users });
+};
+
+export const signup = async (req, res, next) => {
+  const { name, email, password } = req.body;
+  let existingUser;
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    return console.log(err);
+  }
+  if (existingUser) {
+    return res
+      .status(400)
+      .json({ message: "User already exists! Login Instead" });
+  }
+  const user = new User({
+    name,
+    email,
+    password,
+  });
+
+    try {
+        user.save();
+  } catch (err) {
+    console.log(err);
+    }
+    return res.status(201).json({user})
 };
