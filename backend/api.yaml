@@ -7,3 +7,67 @@ info:
 servers:
   - url: http://localhost:5000
     description: Local development server
+
+paths:
+  /api/user/login:
+    post:
+      summary: Login User
+      description: Accounts must be verified before authenticating.
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "yourmail@example.com"
+                password:
+                  type: string
+                  example: "pass123"
+              required:
+                - email
+                - password
+      responses:
+        "200":
+          description: Account details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  name:
+                    type: string
+                    example: "Your Name"
+                  email:
+                    type: string
+                    example: "youremail@example.com"
+                  password:
+                    type: string
+                    example: "$2a$10$W4Ckrw7FG3Hcrc9ocWNfR.wHJ1Hc/r5AmF/4oFKjnQ5AP4N9X85U6"
+                  blogs:
+                    type: array
+                    items:
+                      type: string
+                      properties:
+                        id:
+                          type: string
+                          example: "5eb12e197e06a76ccdefc121"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWIxMmUxOTdlMDZhNzZjY2RlZmMxMjEiLCJpZCI6IjVlYjEyZTE5N2UwNmE3NmNjZGVmYzEyMSIsImlhdCI6MTU4ODc1ODE1N30.xR9H0STbFOpSkuGA9jHNZOJ6eS7umHHqKRhI807YT1Y"
+        "400":
+          description: Invalid credentails
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid credentials"
