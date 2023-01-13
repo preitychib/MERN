@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import Blog from "./components/Blog";
+import Blogs from "./components/Blogs";
 import Auth from "./components/Auth";
 import AddBlog from "./components/AddBlog";
 import BlogDetail from "./components/BlogDetail";
@@ -19,7 +19,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/auth" element={<Auth />} />
-          <Route path="/blogs" element={<Blog />} />
+          <Route path="/blogs" element={<Blogs />} />
           <Route path="/myblogs" element={<UserBlogs />} />
           <Route path="/myblogs/:id" element={<BlogDetail />} />
           <Route path="/blogs/add" element={<AddBlog />} />
