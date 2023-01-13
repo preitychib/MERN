@@ -1,0 +1,9 @@
+openapi: 3.0.0
+info:
+  title: BLOG API
+  description: Express yourself with express.js!
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Local development server

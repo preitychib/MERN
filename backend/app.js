@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import blogRouter from "./routes/blog-routes";
 import router from "./routes/user-routes";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+
+const swaggerJSDoc = YAML.load("./api.yaml");
 
 const app = express();
 app.use(
@@ -11,6 +15,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc));
 app.use("/api/user", router);
 app.use("/api/blog", blogRouter);
 mongoose
