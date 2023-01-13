@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
+import { useNavigate } from "react-router-dom";
 const Auth = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     name: "",
@@ -36,10 +38,12 @@ const Auth = () => {
     if (isSignup) {
       sendRequest("signup")
         .then(() => dispatch(authActions.login()))
+        .then(() => navigate("blogs"))
         .then((data) => console.log(data));
     } else {
       sendRequest()
         .then(() => dispatch(authActions.login()))
+        .then(() => navigate("myblogs"))
         .then((data) => console.log(data));
     }
   };
