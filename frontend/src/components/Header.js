@@ -1,10 +1,13 @@
-import React from "react";
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
-import { bgcolor, Box } from "@mui/system";
+import React, { useState } from "react";
+import { AppBar, Button, Tab, Tabs, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [value, setValue] = useState();
   return (
     <AppBar
+      position="sticky"
       sx={{
         background:
           "radial-gradient(circle, rgba(255,195,160,1) 0%, rgba(255,175,189,1) 70%)",
@@ -12,8 +15,21 @@ const Header = () => {
     >
       <Toolbar>
         <Typography variant="h4">Blogs App</Typography>
+        <Box marginLeft={"auto"} marginRight={"auto"} display="flex">
+          <Tabs
+            value={value}
+            onChange={(e, val) => setValue(val)}
+            textColor="secondary"
+            indicatorColor="secondary"
+          >
+            <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
+            <Tab LinkComponent={Link} to="/myblogs" label="My Blogs" />
+          </Tabs>
+        </Box>
         <Box display="flex" marginLeft="auto">
           <Button
+            LinkComponent={Link}
+            to="/auth"
             variant="contained"
             sx={{ margin: 1, borderRadius: 10 }}
             color="secondary"
@@ -21,11 +37,22 @@ const Header = () => {
             Login
           </Button>
           <Button
+            LinkComponent={Link}
+            to="/auth"
             variant="contained"
             sx={{ margin: 1, borderRadius: 10 }}
             color="secondary"
           >
             Signup
+          </Button>
+          <Button
+            LinkComponent={Link}
+            to="/auth"
+            variant="contained"
+            sx={{ margin: 1, borderRadius: 10 }}
+            color="secondary"
+          >
+            Logout
           </Button>
         </Box>
       </Toolbar>

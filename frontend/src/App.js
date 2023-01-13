@@ -1,7 +1,29 @@
 import Header from "./components/Header";
+import Blog from "./components/Blog";
+import Auth from "./components/Auth";
+import AddBlog from "./components/AddBlog";
+import BlogDetail from "./components/BlogDetail";
+import UserBlogs from "./components/UserBlogs";
 
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 function App() {
-  return <Header />;
+  return (
+    <React.Fragment>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Routes>
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/myblogs" element={<UserBlogs />} />
+          <Route path="/myblogs/:id" element={<BlogDetail />} />
+          <Route path="/blogs/add" element={<AddBlog />} />
+        </Routes>
+      </main>
+    </React.Fragment>
+  );
 }
 
 export default App;
