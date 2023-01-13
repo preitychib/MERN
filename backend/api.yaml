@@ -13,7 +13,7 @@ paths:
     post:
       summary: Login User
       description: Accounts must be verified before authenticating.
-      operationId: loginUser
+      operationId: login
       requestBody:
         required: true
         content:
@@ -33,6 +33,79 @@ paths:
       responses:
         "200":
           description: Account details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Loggedin Successful!"
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "5eb12e197e06a76ccdefc121"
+                      name:
+                        type: string
+                        example: "Your Name"
+                      email:
+                        type: string
+                        example: "youremail@example.com"
+                      password:
+                        type: string
+                        example: "$2a$10$W4Ckrw7FG3Hcrc9ocWNfR.wHJ1Hc/r5AmF/4oFKjnQ5AP4N9X85U6"
+                      blogs:
+                        type: array
+                        items:
+                          type: string
+                          properties:
+                            id:
+                              type: string
+                              example: "5eb12e197e06a76ccdefc121"
+                      token:
+                        type: string
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWIxMmUxOTdlMDZhNzZjY2RlZmMxMjEiLCJpZCI6IjVlYjEyZTE5N2UwNmE3NmNjZGVmYzEyMSIsImlhdCI6MTU4ODc1ODE1N30.xR9H0STbFOpSkuGA9jHNZOJ6eS7umHHqKRhI807YT1Y"
+        "400":
+          description: Invalid credentails
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid credentials"
+
+  /api/user/signup:
+    post:
+      summary: Register a new user account
+      description: Register a new user Required fields are- name,email,password
+      operationId: signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Your Name"
+                email:
+                  type: string
+                  example: "youremail@example.com"
+                password:
+                  type: string
+                  example: "pass123"
+              required:
+                - lastName
+                - email
+                - password
+      responses:
+        "200":
+          description: The registration request was successful
           content:
             application/json:
               schema:
@@ -61,13 +134,44 @@ paths:
                   token:
                     type: string
                     example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWIxMmUxOTdlMDZhNzZjY2RlZmMxMjEiLCJpZCI6IjVlYjEyZTE5N2UwNmE3NmNjZGVmYzEyMSIsImlhdCI6MTU4ODc1ODE1N30.xR9H0STbFOpSkuGA9jHNZOJ6eS7umHHqKRhI807YT1Y"
-        "400":
-          description: Invalid credentails
+
+  /api/user:
+    get:
+      summary: Get a list of all  user
+      description: Get a list of all  user
+      operationId: getAllUsers
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An array of all user
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: "Invalid credentials"
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "5eb12e197e06a76ccdefc121"
+                        name:
+                          type: string
+                          example: "Your Name"
+                        email:
+                          type: string
+                          example: "youremail@example.com"
+                        password:
+                          type: string
+                          example: "$2a$10$W4Ckrw7FG3Hcrc9ocWNfR.wHJ1Hc/r5AmF/4oFKjnQ5AP4N9X85U6"
+                        blogs:
+                          type: array
+                          items:
+                            type: string
+                            properties:
+                              id:
+                                type: string
+                                example: "5eb12e197e06a76ccdefc121"
