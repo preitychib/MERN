@@ -25,10 +25,10 @@ const UserBlogs = () => {
             id={blog._id}
             key={index}
             isUser={true}
-            title={blog.title}
+            title={blog.tittle}
             description={blog.description}
             imageURL={blog.image}
-            userName={user.name}
+            username={user.name}
           />
         ))}
     </div>
