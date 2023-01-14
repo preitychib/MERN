@@ -100,6 +100,7 @@ export const deleteBlog = async (req, res, next) => {
 
 export const getByUserId = async (req, res, next) => {
   const userId = req.params.id;
+
   let userBlogs;
   try {
     userBlogs = await User.findById(userId).populate("blogs");
@@ -107,7 +108,7 @@ export const getByUserId = async (req, res, next) => {
     return console.log(err);
   }
   if (!userBlogs) {
-    return res.status.json({ message: "No Blog Found" });
+    return res.status(400).json({ message: "No Blog Found" });
   }
-  return res.status(200).json({ blogs: userBlogs });
+  return res.status(200).json({ user: userBlogs });
 };
