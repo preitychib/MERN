@@ -11,11 +11,25 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+import axios from "axios";
 
 const Blog = ({ title, description, imageUrl, username, isUser, id }) => {
   const navigate = useNavigate();
   const handleEdit = (e) => {
     navigate(`/myblogs/${id}`);
+  };
+
+  const deleteRequest = async () => {
+    const res = await axios
+      .delete(`http://localhost:5000/api/blog/${id}`)
+      .catch((err) => console.log(err));
+    const data = await res.data;
+    return data;
+  };
+  const handleDelete = () => {
+    deleteRequest()
+      .then(() => navigate("/"))
+      .then(() => navigate("/blogs"));
   };
   return (
     <div>
@@ -42,7 +56,7 @@ const Blog = ({ title, description, imageUrl, username, isUser, id }) => {
               <ModeEditOutlinedIcon />
             </IconButton>
             <IconButton
-              onClick={handleEdit}
+              onClick={handleDelete}
               sx={{ color: "#ffdacc", ":hover": { color: "#dc143c" } }}
             >
               <DeleteForeverOutlinedIcon />
@@ -60,7 +74,7 @@ const Blog = ({ title, description, imageUrl, username, isUser, id }) => {
         <CardMedia
           component="img"
           height="194"
-          image={imageUrl}
+          src={imageUrl}
           alt="blog image"
         />
         <CardContent>

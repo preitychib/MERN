@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import Blog from "../models/Blog";
 import User from "../models/User";
 
@@ -71,7 +71,6 @@ export const getById = async (req, res, next) => {
   let blog;
   try {
     blog = await Blog.findById(id);
-    console.log(blog);
   } catch (err) {
     return console.log(err);
   }
