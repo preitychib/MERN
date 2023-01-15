@@ -7,12 +7,16 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 
-const Blog = ({ title, description, imageUrl, username, isUser }) => {
-  console.log(title, isUser);
+const Blog = ({ title, description, imageUrl, username, isUser, id }) => {
+  const navigate = useNavigate();
+  const handleEdit = (e) => {
+    navigate(`/myblogs/${id}`);
+  };
   return (
     <div>
       <Card
@@ -28,6 +32,7 @@ const Blog = ({ title, description, imageUrl, username, isUser }) => {
         {isUser && (
           <Box display="flex">
             <IconButton
+              onClick={handleEdit}
               sx={{
                 marginLeft: "auto",
                 color: "#ffdacc",
@@ -37,6 +42,7 @@ const Blog = ({ title, description, imageUrl, username, isUser }) => {
               <ModeEditOutlinedIcon />
             </IconButton>
             <IconButton
+              onClick={handleEdit}
               sx={{ color: "#ffdacc", ":hover": { color: "#dc143c" } }}
             >
               <DeleteForeverOutlinedIcon />

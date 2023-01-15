@@ -20,7 +20,7 @@ const AddBlog = () => {
   const sendRequest = async () => {
     const res = await axios
       .post("http://localhost:5000/api/blog/addBlog", {
-        tittle: inputs.title,
+        title: inputs.title,
         description: inputs.description,
         image: inputs.imageUrl,
         user: localStorage.getItem("userId"),

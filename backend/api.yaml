@@ -175,3 +175,271 @@ paths:
                               id:
                                 type: string
                                 example: "5eb12e197e06a76ccdefc121"
+  /api/blog:
+    get:
+      summary: Get a list of all blog
+      description: Get a list of all blog
+      operationId: getAllBlogs
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An array of all blogs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blogs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "5eb12e197e06a76ccdefc121"
+                        title:
+                          type: string
+                          example: "Your Blog title"
+                        description:
+                          type: string
+                          example: "Description of the blog"
+                        image:
+                          type: string
+                          example: "Image url"
+                        user:
+                          type: string
+                          example: "5eb12e197e06a76ccdefc121"
+  /api/blog/addBlog:
+    post:
+      summary: Create a new blog
+      description: Restricted to logged in users.
+      operationId: addBlog
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Your Blog Title"
+                description:
+                  type: string
+                  example: "Your Blog Description"
+                image:
+                  type: string
+                  example: "Image url"
+                user:
+                  type: string
+                  example: "5eb12e197e06a76ccdefc121"
+              required:
+                - title
+                - description
+                - image
+                - user
+      responses:
+        "200":
+          description: Blog created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  title:
+                    type: string
+                    example: "Blog Title"
+                  description:
+                    type: string
+                    example: "Blog description"
+                  image:
+                    type: string
+                    example: "Image url"
+                  user:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  v:
+                    type: string
+                    example: "version"
+        "400":
+          description: Need to add all the required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Please add the required fields"
+  /api/blog/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: Blog id
+        required: true
+        example: "5eb12e197e06a76ccdefc121"
+        schema:
+          type: string
+    get:
+      summary: Get blog details
+      description: User can access only their blogs
+      operationId: getById
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: BLog details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  title:
+                    type: string
+                    example: "Blog Tittle"
+                  description:
+                    type: string
+                    example: "Blog description"
+                  user:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  image:
+                    type: string
+                    example: "Image Url"
+                  v:
+                    type: string
+                    example: "version"
+    delete:
+      summary: Delete an blog
+      description: User can delete only their blog
+      operationId: deleteBlog
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Blog deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+
+  /api/blog/update/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: Blog id
+        required: true
+        example: "5eb12e197e06a76ccdefc121"
+        schema:
+          type: string
+    put:
+      summary: Get blog details
+      description: User can access only their blogs
+      operationId: updateBlog
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "5eb12e197e06a76ccdefc121"
+                title:
+                  type: string
+                  example: "Blog Tittle"
+                description:
+                  type: string
+                  example: "Blog description"
+                image:
+                  type: string
+                  example: "Image Url"
+                user:
+                  type: string
+                  example: "5eb12e197e06a76ccdefc121"
+                v:
+                  type: string
+                  example: "version"
+      responses:
+        "200":
+          description: Blog updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  title:
+                    type: string
+                    example: "Blog Tittle"
+                  description:
+                    type: string
+                    example: "Blog description"
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  v:
+                    type: string
+                    example: "version"
+
+  /api/blog/user/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: Blog  id
+        required: true
+        example: "5eb12e197e06a76ccdefc121"
+        schema:
+          type: string
+    get:
+      summary: Get a list of all blog of user
+      description: Get a list of all blog user
+      operationId: getByUserId
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An array of all blogs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blogs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "5eb12e197e06a76ccdefc121"
+                        title:
+                          type: string
+                          example: "Your Blog title"
+                        description:
+                          type: string
+                          example: "Description of the blog"
+                        image:
+                          type: string
+                          example: "Image url"
+                        user:
+                          type: string
+                          example: "5eb12e197e06a76ccdefc121"

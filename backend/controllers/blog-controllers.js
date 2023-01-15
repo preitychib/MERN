@@ -16,7 +16,7 @@ export const getAllBlogs = async (req, res, next) => {
 };
 
 export const addBlog = async (req, res, next) => {
-  const { tittle, description, image, user } = req.body;
+  const { title, description, image, user } = req.body;
 
   let existingUser;
   try {
@@ -32,7 +32,7 @@ export const addBlog = async (req, res, next) => {
   }
 
   const blog = new Blog({
-    tittle,
+    title,
     description,
     image,
     user,
@@ -52,11 +52,11 @@ export const addBlog = async (req, res, next) => {
 };
 
 export const updateBlog = async (req, res, next) => {
-  const { tittle, description } = req.body;
+  const { title, description } = req.body;
   const blogId = req.params.id;
   let blog;
   try {
-    blog = await Blog.findByIdAndUpdate(blogId, { tittle, description });
+    blog = await Blog.findByIdAndUpdate(blogId, { title, description });
   } catch (err) {
     return console.log(err);
   }

@@ -25,7 +25,7 @@ const UserBlogs = () => {
             id={blog._id}
             key={index}
             isUser={true}
-            title={blog.tittle}
+            title={blog.title}
             description={blog.description}
             imageURL={blog.image}
             username={user.name}
