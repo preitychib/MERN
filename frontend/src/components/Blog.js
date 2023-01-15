@@ -4,10 +4,15 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  IconButton,
   Typography,
 } from "@mui/material";
+import { Box } from "@mui/system";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 
-const Blog = ({ title, description, imageUrl, username }) => {
+const Blog = ({ title, description, imageUrl, username, isUser }) => {
+  console.log(title, isUser);
   return (
     <div>
       <Card
@@ -20,13 +25,31 @@ const Blog = ({ title, description, imageUrl, username }) => {
           ":hover": { boxShadow: "10px 10px 20px #ffafbd" },
         }}
       >
+        {isUser && (
+          <Box display="flex">
+            <IconButton
+              sx={{
+                marginLeft: "auto",
+                color: "#ffdacc",
+                ":hover": { color: "#ffce44" },
+              }}
+            >
+              <ModeEditOutlinedIcon />
+            </IconButton>
+            <IconButton
+              sx={{ color: "#ffdacc", ":hover": { color: "#dc143c" } }}
+            >
+              <DeleteForeverOutlinedIcon />
+            </IconButton>
+          </Box>
+        )}
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
+            <Avatar sx={{ bgcolor: "#fe647e" }} aria-label="recipe">
               {username ? username.charAt(0) : ""}
             </Avatar>
           }
-          title= {title}
+          title={title}
         />
         <CardMedia
           component="img"
@@ -36,7 +59,7 @@ const Blog = ({ title, description, imageUrl, username }) => {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {description}
+            <b>{username}</b>: {description}
           </Typography>
         </CardContent>
       </Card>
