@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store";
 
 const Header = () => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [value, setValue] = useState();
   return (
@@ -36,7 +36,6 @@ const Header = () => {
         <Box display="flex" marginLeft="auto">
           {!isLoggedIn && (
             <>
-              {" "}
               <Button
                 LinkComponent={Link}
                 to="/auth"
@@ -54,7 +53,7 @@ const Header = () => {
                 color="secondary"
               >
                 Signup
-              </Button>{" "}
+              </Button>
             </>
           )}
           {isLoggedIn && (

@@ -8,8 +8,8 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
     },
     logout(state) {
-      localStorage.removeItem("userId");
       state.isLoggedIn = false;
+      localStorage.removeItem("userId");
     },
   },
 });

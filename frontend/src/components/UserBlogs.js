@@ -27,7 +27,7 @@ const UserBlogs = () => {
             isUser={true}
             title={blog.title}
             description={blog.description}
-            imageURL={blog.image}
+            imageUrl={blog.image}
             username={user.name}
           />
         ))}
